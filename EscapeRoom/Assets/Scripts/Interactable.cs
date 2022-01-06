@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] GameObject interactUI = null;
+    [SerializeField] bool needsLongHoldToPickUp;
+    [SerializeField] string interactionText;
 
-    bool isActive = false;
-
-    void Update()
+    public bool GetNeedsLongHoldPickup()
     {
-        interactUI.SetActive(isActive);
+        return needsLongHoldToPickUp;
     }
 
-    private void OnTriggerStay(Collider other) {
-        if(other.CompareTag("Player"))
+    public string GetInteractionText()
+    {
+        if(interactionText == "")
         {
-            isActive = true;
+            return "Interact";
         }
+        return interactionText;
     }
 
-    private void OnTriggerExit(Collider other) {
-        if(other.CompareTag("Player"))
-        {
-            isActive = false;
-        }
+    public void Activate()
+    {
+        Debug.Log(this.name + " has been activated!");
     }
-
 }
